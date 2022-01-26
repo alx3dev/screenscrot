@@ -14,7 +14,6 @@ This will install SCROT.
 # How to use
 
 ```ruby
-Default
 # argument 1 == number of seconds to record (default 30)
 # argument 2 == directory and gif title (default ScreenScrot)
 
