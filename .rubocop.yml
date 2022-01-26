@@ -1,0 +1,10 @@
+AllCops:
+  TargetRubyVersion: '3.0'
+  NewCops: enable
+
+# Offense count: 1
+# Configuration parameters: Include.
+# Include: **/*.gemspec
+Gemspec/RequiredRubyVersion:
+  Exclude:
+    - 'screenscrot.gemspec'

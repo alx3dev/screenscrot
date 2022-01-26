@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/screenscrot'
+
+puts 'Start Recording Screenshots...'
+
+ScreenScrot.setup do |screen|
+  screen.title = ARGV[1] || 'ScreenScrot'
+  screen.ext = 'png'
+  screen.path = Dir.pwd
+end
+
+@screen = ScreenScrot.new(ScreenScrot.title)
+
+system 'clear'
+
+cnt = 5
+cnt.times do
+  puts "Starting in #{cnt -= 1}"
+  sleep 1
+  system 'clear'
+end
+
+puts '[Screenshot Recording Started]'
+
+str_time = Time.now
+max_time = ARGV[0].to_i unless ARGV.empty?
+
+display = ARGV.include?('--all') ? :all : :active
+display = '--select' if ARGV.include?('--select')
+
+until (Time.now - str_time).to_i >= max_time
+  @screen.capture(display)
+  sleep 0.5
+end
+
+print '[Screenshot Recording Stopped] after '
+puts  "#{(Time.now - str_time).to_f.round(2)} seconds"
+puts  "Captured frames -> [#{@screen.frames}]"
+puts ' > making GIF animation...'
+
+@screen.to_gif
+
+print "[GIF CREATED!] - File saved as #{@screen.title}.gif in #{@screen.directory}"
+puts
