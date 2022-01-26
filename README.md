@@ -2,6 +2,8 @@
 
 Linux terminal recording with Ruby and Scrot.
 
+![preview](https://github.com/alx3dev/kolorit/blob/main/demo.gif)
+
 # Install
 
 ```bash
