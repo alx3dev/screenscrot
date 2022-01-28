@@ -6,4 +6,4 @@ set -vx
 bundle install
 
 sudo apt update -y -qq
-sudo apt install scrot
+sudo apt install scrot -y
