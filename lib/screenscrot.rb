@@ -97,7 +97,8 @@ class ScreenScrot
     title += '.gif' unless title.end_with? '.gif'
     exec = "convert -delay #{opts[:delay]} -loop #{opts[:loop]} *.#{opts[:ext]} #{title}"
     system exec
-  rescue StandardError
+  rescue StandardError => e
+    puts e.message
     false
   end
 end
