@@ -1,9 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
-set -vx
 
+
+function on_linux() {
+  sudo apt install scrot -y 
+}
+
+function on_mac() {
+  sudo brew install scrot -y
+}
+
+function install() {
+  echo -e -n "Type 'm' if you are using Mac, or any key if you are on linux (m/M): "
+    read mac_key
+    if [ "$mac_key" == "m" ] || [ "$mac_key" == "M" ]; then
+      on_mac; else
+      on_linux
+    fi
+  sudo brew install scrot -y >/dev/null 2>&1;
+  echo -e "SCROT Installed!";
+}
+
+if command -v scrot >/dev/null 2>&1; then
+  echo -e "SCROT already installed"; else
+  echo -e "Installing SCROT..."
+  install
+fi
+
+echo -e "Installing ScreenScrot gem..."
 bundle install
-
-sudo apt update -y -qq
-sudo apt install scrot -y
